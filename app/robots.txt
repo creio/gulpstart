@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /callme
+Sitemap: http://website.org/sitemap.xml
+Host: website.org

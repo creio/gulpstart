@@ -1,0 +1,15 @@
+{
+  "name": "myproject",
+  "version": "0.0.1",
+  "dependencies": {
+    "respond": "^1.4.2",
+    "html5shiv": "^3.7.3",
+    "magnific-popup": "^1.1.0",
+    "animate.css": "^3.5.1",
+    "font-awesome": "^4.6.1",
+    "hover": "Hover#^2.0.2"
+  },
+  "devDependencies": {
+    "jquery": "^2.2.3"
+  }
+}
