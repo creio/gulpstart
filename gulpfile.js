@@ -30,10 +30,7 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
 
 gulp.task('script', function() {
 	return gulp.src([ // Берем сжатые библиотеки
-		'app/libs/jquery/dist/jquery.min.js', // Берем jQuery
-		'app/libs/html5shiv/dist/html5shiv-printshiv.min.js', // Берем html5shiv
-		'app/libs/html5shiv/dist/html5shiv.min.js', // Берем html5shiv
-		'app/libs/respond/dest/respond.min.js' // Берем respond
+		'app/libs/jquery/dist/jquery.min.js' // Берем jQuery
 		])
 		.pipe(gulp.dest('app/js')); // Выгружаем в папку app/js
 });

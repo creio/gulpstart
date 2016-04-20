@@ -1,4 +1,5 @@
 node_modules/
 dist/
-.start-mint
 app/libs/
+.start-mint
+.gh
