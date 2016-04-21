@@ -46,7 +46,6 @@ gulp.task('scripts', ['script'], function() {
 
 gulp.task('css-libs', ['sass'], function() {
 	return gulp.src([ // Выбираем файлы для минификации
-		'app/css/libs.css',
 		'app/css/main.css'
 		])
 		.pipe(cssnano()) // Сжимаем
