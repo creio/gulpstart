@@ -1,0 +1,54 @@
+*::-webkit-input-placeholder
+	color: #666
+	opacity: 1
+
+*:-moz-placeholder
+	color: #666
+	opacity: 1
+
+*::-moz-placeholder
+	color: #666
+	opacity: 1
+
+*:-ms-input-placeholder
+	color: #666
+	opacity: 1
+
+body input:focus:required:invalid,
+body textarea:focus:required:invalid
+	color: #666
+body input:required:valid,
+body textarea:required:valid
+	color: #666
+
+//Custom Styles Here
+body
+	background-color: #212130
+	color: #333
+	min-width: 240px
+
+.hidden
+	display: none
+
+.preloader
+	background-color: #5659A1
+	bottom: 0
+	height: 100%
+	left: 0
+	overflow: hidden !important
+	position: fixed
+	right: 0
+	top: 0
+	width: 100%
+	z-index: 999999
+
+.status
+	background: url("../img/prelod.gif") no-repeat rgba(0, 0, 0, 0)
+	height: 75px
+	left: 0
+	right: 0
+	margin: 0 auto
+	position: absolute
+	top: calc(50% - 66px)
+	width: 75px
+	z-index: 9999999

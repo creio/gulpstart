@@ -1,7 +1,7 @@
 {
-  "name": "myproject",
+  "name": "2gud-start",
   "version": "1.0.0",
-  "description": "Gulp-start Html Sass",
+  "description": "Gulp html/sass",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-cssnano": "^2.1.1",
     "gulp-imagemin": "^2.4.0",
-    "gulp-plumber": "^1.1.0",
+    "gulp-notify": "^2.2.0",
     "gulp-sass": "^2.2.0",
     "gulp-uglifyjs": "^0.6.2",
     "imagemin-pngquant": "^4.2.2"

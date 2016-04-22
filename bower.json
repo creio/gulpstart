@@ -1,13 +1,11 @@
 {
-  "name": "myproject",
+  "name": "2gud-start",
   "version": "0.0.1",
   "dependencies": {
-    "magnific-popup": "^1.1.0",
-    "animate.css": "^3.5.1",
-    "font-awesome": "^4.6.1",
-    "hover": "Hover#^2.0.2"
+    "font-awesome": "^4.6.1"
   },
   "devDependencies": {
-    "jquery": "^2.2.3"
+    "jquery": "^2.2.3",
+    "fullpage.js": "^2.7.9"
   }
 }

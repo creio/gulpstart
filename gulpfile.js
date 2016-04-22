@@ -2,6 +2,7 @@ var gulp       = require('gulp'), // Подключаем Gulp
 	sass         = require('gulp-sass'), //Подключаем Sass пакет,
 	browserSync  = require('browser-sync'), // Подключаем Browser Sync
 	concat       = require('gulp-concat'), // Подключаем gulp-concat (для конкатенации файлов)
+	notify       = require('gulp-notify');
 	uglify       = require('gulp-uglifyjs'), // Подключаем gulp-uglifyjs (для сжатия JS)
 	cssnano      = require('gulp-cssnano'), // Подключаем пакет для минификации CSS
 	rename       = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
@@ -13,11 +14,17 @@ var gulp       = require('gulp'), // Подключаем Gulp
 
 gulp.task('sass', function(){ // Создаем таск Sass
 	return gulp.src('app/sass/**/*.sass') // Берем источник
-		.pipe(sass()) // Преобразуем Sass в CSS посредством gulp-sass
+		.pipe( sass().on( 'error', notify.onError(
+		{
+			message: "<%= error.message %>",
+			title  : "Sass Error!"
+			} ) )
+		)
 		.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true })) // Создаем префиксы
 		.pipe(gulp.dest('app/css')) // Выгружаем результата в папку app/css
+		.pipe( notify( 'SASS - хорошая работа!' ) )
 		.pipe(browserSync.reload({stream: true})) // Обновляем CSS на странице при изменении
-});
+		});
 
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
 	browserSync({ // Выполняем browserSync
@@ -37,7 +44,8 @@ gulp.task('script', function() {
 
 gulp.task('scripts', ['script'], function() {
 	return gulp.src([ // Берем все необходимые библиотеки
-		'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js' // Берем Magnific Popup
+		'app/libs/fullpage.js/vendors/jquery.slimscroll.min.js',
+		'app/libs/fullpage.js/dist/jquery.fullpage.min.js'
 		])
 		.pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
 		.pipe(uglify()) // Сжимаем JS файл
@@ -85,8 +93,7 @@ gulp.task('build', ['clean', 'img', 'sass', 'scripts'], function() {
 
 	var buildCss = gulp.src([ // Переносим стили, библиотеки в продакшен
 		'app/css/main.css',
-		'app/css/main.min.css',
-		'app/css/libs.min.css'
+		'app/css/main.min.css'
 		])
 	.pipe(gulp.dest('dist/css'))
 

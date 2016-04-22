@@ -29,7 +29,9 @@
 
 	<!-- Load CSS -->
 	<style></style>
-	<link rel="stylesheet" href="css/main.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<!-- Load CSS Compilled without JS -->
+	<!-- <noscript><link rel="stylesheet" href="css/main.min.css"></noscript> -->
 
 </head>
 <body>
@@ -55,6 +57,11 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
+	<!-- Load CSS compiled 
+	<script>var ms=document.createElement("link");ms.rel="stylesheet";
+		ms.href="css/main.min.css";document.getElementsByTagName("head")[0].appendChild(ms);
+	</script>-->
 	
 	<!-- Load Scripts -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>

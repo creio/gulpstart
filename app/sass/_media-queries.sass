@@ -1,0 +1,46 @@
+/* 1________________________________________  media-queries */
+/* 1.1_____________________ def vars */
+$xsdef: 600px // don`t change this var. You can change -> main vars <- like -> $xs <-
+$lgdef: 1200px //don`t change this var. You can change -> main vars <- like -> $lg <-
+/* btm def vars */
+/* 1.2_____________________ main vars */
+$xs: $xsdef // can change. Like this -> $xs: 500px; or $xs: 720px; or $xs: any count; !But count must be < $lg
+$lg: 800px // can change Like this -> $lg: 1000px; or $lg: 1300px; !But count must be > $xs
+/* btm main vars */
+/* 1.3_____________________ def mixins */
+@mixin mq($bp)
+	@if $bp == "xs"
+		@media screen and (max-width: $xs)
+			@content
+
+	@else if $bp == "mdleft"
+		@media screen and (max-width: ($lg - 1))
+			@content
+
+	@else if $bp == "md"
+		@media (min-width: ($xs + 1)) and (max-width: ($lg - 1))
+			@content
+	
+	@else if $bp == "mdright"
+		@media screen and (min-width: ($xs + 1))
+			@content
+	
+	@else if $bp == "lg"
+		@media screen and (min-width: $lg)
+			@content
+ 
+@mixin mqmin($min)
+	@media screen and (min-width: $min)
+		@content
+
+@mixin mqmax($max)
+	@media screen and (max-width: $max)
+		@content
+
+@mixin mqfromto($min, $max)
+	@media (min-width: $min) and (max-width: $max)
+		@content
+		
+@mixin mqiphone4()
+	@media screen and (max-width: 360px)
+		@content
