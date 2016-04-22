@@ -2,7 +2,7 @@ var gulp       = require('gulp'), // Подключаем Gulp
 	sass         = require('gulp-sass'), //Подключаем Sass пакет,
 	browserSync  = require('browser-sync'), // Подключаем Browser Sync
 	concat       = require('gulp-concat'), // Подключаем gulp-concat (для конкатенации файлов)
-	notify       = require('gulp-notify');
+	notify       = require('gulp-notify'); // Уведомления
 	uglify       = require('gulp-uglifyjs'), // Подключаем gulp-uglifyjs (для сжатия JS)
 	cssnano      = require('gulp-cssnano'), // Подключаем пакет для минификации CSS
 	rename       = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
@@ -37,15 +37,15 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
 
 gulp.task('script', function() {
 	return gulp.src([ // Берем сжатые библиотеки
-		'app/libs/jquery/dist/jquery.min.js' // Берем jQuery
+		'bower_components/jquery/dist/jquery.min.js' // Берем jQuery
 		])
 		.pipe(gulp.dest('app/js')); // Выгружаем в папку app/js
 });
 
 gulp.task('scripts', ['script'], function() {
 	return gulp.src([ // Берем все необходимые библиотеки
-		'app/libs/fullpage.js/vendors/jquery.slimscroll.min.js',
-		'app/libs/fullpage.js/dist/jquery.fullpage.min.js'
+		'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
+		'bower_components/fullpage.js/dist/jquery.fullpage.min.js'
 		])
 		.pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
 		.pipe(uglify()) // Сжимаем JS файл
@@ -63,7 +63,7 @@ gulp.task('css-libs', ['sass'], function() {
 
 gulp.task('fonts', function() {
 	return gulp.src([ // Берем все необходимые шрифты
-		'app/libs/font-awesome/fonts/*.+(otf|eot|ttf|svg|woff|woff2)' // Берем font-awesome
+		'bower_components/font-awesome/fonts/*.+(otf|eot|ttf|svg|woff|woff2)' // Берем font-awesome
 		])
 		.pipe(gulp.dest('app/fonts')); // Выгружаем в папку app/fonts
 });
@@ -104,7 +104,8 @@ gulp.task('build', ['clean', 'img', 'sass', 'scripts'], function() {
 	.pipe(gulp.dest('dist/js'))
 
 	var buildHtml = gulp.src('app/*.+(html|php|xml|txt)') // Переносим нужные файлы в продакшен
-	.pipe(gulp.dest('dist'));
+	.pipe(gulp.dest('dist'))
+	.pipe( notify( 'BUILD - хорошая работа!' ) );
 
 });
 
