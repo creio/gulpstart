@@ -29,7 +29,7 @@ gulp.task('sass', function(){ // Создаем таск Sass
 gulp.task('browser-sync', function() { // Создаем таск browser-sync
 	browserSync({ // Выполняем browserSync
 		server: { // Определяем параметры сервера
-			baseDir: 'app' // Директория для сервера - app
+			baseDir: 'app' // Директория для сервера
 		},
 		notify: false // Отключаем уведомления
 	});
@@ -42,7 +42,16 @@ gulp.task('script', function() {
 		.pipe(gulp.dest('app/js')); // Выгружаем в папку app/js
 });
 
-gulp.task('scripts', ['script'], function() {
+gulp.task('mainjs', function() {
+	return gulp.src([ // Берем все необходимые библиотеки
+		'app/js/main.js'
+		])
+		.pipe(concat('main.min.js')) // Собираем их в кучу в новом файле main.min.js
+		.pipe(uglify()) // Сжимаем JS файл
+		.pipe(gulp.dest('app/js')); // Выгружаем в папку app/js
+});
+
+gulp.task('scripts', ['script', 'mainjs'], function() {
 	return gulp.src([ // Берем все необходимые библиотеки
 		'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
 		'bower_components/fullpage.js/dist/jquery.fullpage.min.js'
