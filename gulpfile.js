@@ -24,6 +24,7 @@ gulp.task('sass', function(){ // Создаем таск Sass
 			}))
 		)
 		.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], { cascade: true })) // Создаем префиксы
+		.pipe(csscomb()) // Комбинирование
 		.pipe(gulp.dest('app/css')) // Выгружаем результата в папку app/css
 		.pipe(notify('SASS - хорошая работа!'))
 		.pipe(browserSync.reload({stream: true})) // Обновляем CSS на странице при изменении
@@ -67,7 +68,7 @@ gulp.task('scripts', ['script', 'mainjs'], function() {
 });
 
 // Css
-gulp.task('css-libs', ['sass'], function() {
+gulp.task('css', ['sass'], function() {
 	return gulp.src([ // Выбираем файлы для минификации
 		'app/css/main.css'
 		])
@@ -115,7 +116,6 @@ gulp.task('build', ['clean', 'img', 'sass', 'scripts'], function() {
 		'app/css/main.css',
 		'app/css/main.min.css'
 		])
-	.pipe(csscomb())
 	.pipe(gulp.dest('dist/css'))
 
 	var buildFonts = gulp.src('app/fonts/**/*') // Переносим шрифты в продакшен
