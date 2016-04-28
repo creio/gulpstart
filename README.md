@@ -28,5 +28,5 @@
 ### Сборка проекта
 - gulp build
 
-## Автор
-Доступен в телеграме https://telegram.me/spyads
+### Отправка на сервер
+- gulp sftp
