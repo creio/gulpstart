@@ -1,5 +1,5 @@
 {
-  "name": "partfolio",
+  "name": "start",
   "version": "1.0.0",
   "description": "Gulp html/sass",
   "main": "index.js",
@@ -18,7 +18,9 @@
     "gulp-csscomb": "^3.0.7",
     "gulp-cssnano": "^2.1.1",
     "gulp-imagemin": "^2.4.0",
+    "gulp-jade": "^1.1.0",
     "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
     "gulp-sass": "^2.2.0",
     "gulp-sftp": "^0.1.5",
     "gulp-uglifyjs": "^0.6.2",

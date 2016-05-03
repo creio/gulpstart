@@ -1,12 +1,14 @@
 var gulp       = require('gulp'), // Подключаем Gulp
 	sass         = require('gulp-sass'), //Подключаем Sass пакет,
+	jade         = require('gulp-jade'),
 	browserSync  = require('browser-sync'), // Подключаем Browser Sync
 	concat       = require('gulp-concat'), // Подключаем gulp-concat (для конкатенации файлов)
-	notify       = require('gulp-notify'); // Уведомления
+	notify       = require('gulp-notify'), // Уведомления
 	uglify       = require('gulp-uglifyjs'), // Подключаем gulp-uglifyjs (для сжатия JS)
 	cssnano      = require('gulp-cssnano'), // Подключаем пакет для минификации CSS
-	csscomb      = require('gulp-csscomb'); // Упорядочивание
+	csscomb      = require('gulp-csscomb'), // Упорядочивание
 	rename       = require('gulp-rename'), // Подключаем библиотеку для переименования файлов
+	plumber      = require('gulp-plumber'),
 	del          = require('del'), // Подключаем библиотеку для удаления файлов и папок
 	imagemin     = require('gulp-imagemin'), // Подключаем библиотеку для работы с изображениями
 	pngquant     = require('imagemin-pngquant'), // Подключаем библиотеку для работы с png
@@ -60,7 +62,9 @@ gulp.task('mainjs', function() {
 gulp.task('scripts', ['script', 'mainjs'], function() {
 	return gulp.src([ // Берем все необходимые библиотеки
 		'bower_components/fullpage.js/vendors/jquery.slimscroll.min.js',
-		'bower_components/fullpage.js/dist/jquery.fullpage.min.js'
+		'bower_components/fullpage.js/dist/jquery.fullpage.min.js',
+		'bower_components/howler.js/howler.js',
+		'bower_components/clay/dist/clay.js'
 		])
 		.pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
 		.pipe(uglify()) // Сжимаем JS файл
@@ -85,11 +89,22 @@ gulp.task('fonts', function() {
 		.pipe(gulp.dest('app/fonts')); // Выгружаем в папку app/fonts
 });
 
+// Jade
+gulp.task('jade', function(){
+	gulp.src('app/jade/*.jade')
+		.pipe(plumber())
+		.pipe(jade({pretty: true}))
+		.on('error', console.log)
+		.pipe(gulp.dest('app/'))
+		.pipe(browserSync.reload({stream: true}));
+});
+
 // Sync reload
-gulp.task('watch', ['browser-sync', 'css-libs', 'scripts', 'fonts'], function() {
-	gulp.watch('app/sass/**/*.sass', ['sass']); // Наблюдение за sass файлами в папке sass
-	gulp.watch('app/*.html', browserSync.reload); // Наблюдение за HTML файлами в корне проекта
-	gulp.watch('app/js/**/*.js', browserSync.reload);   // Наблюдение за JS файлами в папке js
+gulp.task('watch', ['browser-sync', 'css', 'scripts', 'fonts'], function() {
+	gulp.watch('app/sass/**/*.sass', ['sass']); // Наблюдение за sass файлами
+	gulp.watch('app/jade/**/*.jade', ['jade']);
+	gulp.watch('app/**/*.html', browserSync.reload);
+	gulp.watch('app/js/**/*.js', browserSync.reload);
 });
 
 // Del
@@ -134,7 +149,7 @@ gulp.task('clear', function (callback) {
 	return cache.clearAll();
 });
 
-// Deploy
+// Deploy sftp
 gulp.task('sftp', function () {
 	return gulp.src('dist/**/*')
 		.pipe(sftp({
