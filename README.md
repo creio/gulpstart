@@ -15,7 +15,6 @@
 - sudo npm i -g bower
 
 ### В проекте выполнить
-- npm i gulp --save-dev
 - npm i
 - bower i
 
